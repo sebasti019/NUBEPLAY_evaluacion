@@ -1,27 +1,16 @@
 package com.example.NUBEPLAY_USUARIO.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.example.NUBEPLAY_USUARIO.model.UsuarioModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public class UsuarioRepository {
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+import java.util.List;
 
+@Repository
+public interface UsuarioRepository extends JpaRepository<UsuarioModel, Integer> {
+    // Buscar usuarios por rol (ignorando mayúsculas/minúsculas)
+    List<UsuarioModel> findByRolIgnoreCase(String rol);
 
-    public List<UsuarioModel> getUsuarios() {
-        return usuarioRepository.findAll();
-    }
-
-
-    public UsuarioModel guardarUsuario(UsuarioModel usuario) {
-        return usuarioRepository.save(usuario);
-    }
-
-
-    public Optional<UsuarioModel> buscarUsuario(int id) {
-        return usuarioRepository.findById(id);
-    }
-
-    
+    // Buscar usuarios por estado activo
+    List<UsuarioModel> findByActivo(boolean activo);
 }
