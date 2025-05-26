@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CarritoItemRepository extends JpaRepository<CarritoItemRepository, Integer> {
-    List<CarritoItemModel> findByCarritoIdCarrito(Integer idCarrito);
-    
+public interface CarritoItemRepository extends JpaRepository<CarritoItemModel, Integer> {
+    List<CarritoItemModel> findByCarrito_IdCarrito(Integer idCarrito);
 }

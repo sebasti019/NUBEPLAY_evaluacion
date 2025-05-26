@@ -24,15 +24,14 @@ public class CarritoController {
 
     @PostMapping("{idCarrito}/agregar")
     public CarritoItemModel agregarProducto(@PathVariable int idCarrito,
-                                            @RequestParam int idJuego,
-                                            @RequestParam int cantidad) {
+                                        @RequestParam int idJuego,
+                                        @RequestParam int cantidad) {
         CarritoItemModel item = new CarritoItemModel();
-        item.setIdCarrito(idCarrito);
         item.setIdJuego(idJuego);
         item.setCantidad(cantidad);
-        return carritoService.agregarItem(item);
-    }
 
+        return carritoService.agregarItem(item, idCarrito);
+    }
     @GetMapping("{idCarrito}/items")
     public List<CarritoItemModel> verCarrito(@PathVariable int idCarrito) {
         return carritoService.obtenerItems(idCarrito);

@@ -19,31 +19,21 @@ public class CarritoService {
     @Autowired
     private CarritoItemRepository carritoItemRepository;
 
-    public CarritoItemModel crearCarrito(CarritoItemModel carrito) {
+    public CarritoModel crearCarrito(CarritoModel carrito) {
         return carritoRepository.save(carrito);
     }
 
-    public CarritoItemModel agregarItem(int idCarrito, int idJuego, int cantidad) {
-        Optional<CarritoModel> carritoOpt = carritoRepository.findById(idCarrito);
-        if (carritoOpt.isEmpty()) {
-            throw new RuntimeException("Carrito no encontrado");
-        }
-        CarritoEntity carrito = carritoOpt.get();
-
-        CarritoItemEntity item = new CarritoItemEntity();
-        item.setCarrito(carrito);
-        item.setIdJuego(idJuego);
-        item.setCantidad(cantidad);
-
-        return carritoItemRepository.save(item);
+    public CarritoItemModel agregarItem(CarritoItemModel item, int idCarrito) {
+    Optional<CarritoModel> carritoOpt = carritoRepository.findById(idCarrito);
+    if (carritoOpt.isEmpty()) {
+        throw new RuntimeException("Carrito no encontrado");
     }
 
-    public List<CarritoItemEntity> obtenerItems(int idCarrito) {
-        return carritoItemRepository.findByCarritoIdCarrito(idCarrito);
-    }
+    item.setCarrito(carritoOpt.get());
+    return carritoItemRepository.save(item);
+}
 
-    public Optional<CarritoEntity> buscarCarrito(int idCarrito) {
-        return carritoRepository.findById(idCarrito);
+    public List<CarritoItemModel> obtenerItems(int idCarrito) {
+        return carritoItemRepository.findByCarrito_IdCarrito(idCarrito);
     }
-    
 }

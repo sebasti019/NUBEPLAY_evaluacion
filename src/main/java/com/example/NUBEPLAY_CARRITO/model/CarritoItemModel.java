@@ -13,11 +13,13 @@ public class CarritoItemModel {
     private int idItem;
 
     private int idJuego;
-
     private int cantidad;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_carrito")
-    private int idCarrito;
+    private CarritoModel carrito;
 
+    public int getIdCarrito() {
+        return carrito != null ? carrito.getIdCarrito() : 0;
+    }
 }
